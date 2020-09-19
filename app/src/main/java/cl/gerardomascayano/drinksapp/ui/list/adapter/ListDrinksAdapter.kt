@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cl.gerardomascayano.drinksapp.core.GlideApp
 import cl.gerardomascayano.drinksapp.databinding.ItemDrinkBinding
 import cl.gerardomascayano.drinksapp.domain.model.Drink
+import timber.log.Timber
 
 class ListDrinksAdapter() : RecyclerView.Adapter<ListDrinksAdapter.DrinkListViewHolder>() {
 
@@ -37,6 +38,8 @@ class ListDrinksAdapter() : RecyclerView.Adapter<ListDrinksAdapter.DrinkListView
 //                .placeholder()
 //                .error()
                 .into(viewBinding.ivDrinkImage)
+
+            Timber.d("URL: ${drink.imageUrl}")
         }
 
     }

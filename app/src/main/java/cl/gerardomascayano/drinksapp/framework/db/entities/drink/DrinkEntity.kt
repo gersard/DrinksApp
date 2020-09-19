@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "drink")
 data class DrinkEntity(
+    // 0 for autogenerate
     @PrimaryKey(autoGenerate = true) val drinkId: Int,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "image_url") val imageUrl: String?,

@@ -12,7 +12,7 @@ interface IngredientDao {
     suspend fun addIngredient(ingredient: IngredientEntity)
 
     @Insert(onConflict = REPLACE)
-    suspend fun addAllIngredients(ingredients: List<IngredientEntity>)
+    suspend fun addAllIngredients(ingredients: List<IngredientEntity>): List<Long>
 
     @Insert(onConflict = REPLACE)
     suspend fun addAllDetailIngredients(detailIngredients: List<IngredientDetailEntity>)

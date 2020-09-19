@@ -41,7 +41,7 @@ class ListDrinksFragment : Fragment() {
 
     private fun setupUi() {
         viewBinding.rvFavoriteDrinkList.setHasFixedSize(true)
-        viewBinding.rvFavoriteDrinkList.layoutManager = LinearLayoutManager(context)
+        viewBinding.rvFavoriteDrinkList.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         viewBinding.rvFavoriteDrinkList.adapter = favoriteAdapterDrinks
     }
 

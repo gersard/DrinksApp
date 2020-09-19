@@ -8,8 +8,10 @@
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/width_image_drink_list"
         android:layout_height="@dimen/height_favorite_drink_title"
+        android:layout_gravity="center_horizontal"
+        app:cardCornerRadius="8dp"
         app:cardElevation="10dp">
 
         <ImageView

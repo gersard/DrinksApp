@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="width_drink_list">180dp</dimen>
+    <dimen name="width_image_drink_list">160dp</dimen>
     <dimen name="height_drink_list">180dp</dimen>
 
     <dimen name="height_favorite_drink_title">150dp</dimen>
