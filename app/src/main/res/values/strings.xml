@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">DrinksApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_favorite_drinks">Favorite\nDrinks</string>
+    <string name="title_all_drinks">All\ndrinks</string>
+    <string name="hint_search_drinks">Search drinks</string>
 </resources>
