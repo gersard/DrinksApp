@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cl.gerardomascayano.drinksapp.R
 import cl.gerardomascayano.drinksapp.core.Resource
 import cl.gerardomascayano.drinksapp.core.extension.exhaustive
+import cl.gerardomascayano.drinksapp.core.extension.gone
 import cl.gerardomascayano.drinksapp.databinding.FragmentListDrinksBinding
 import cl.gerardomascayano.drinksapp.ui.list.adapter.ListDrinksAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +37,7 @@ class ListDrinksFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupUi()
         setupFavoriteObserver()
+        setupUnfavoriteObserver()
         viewModel.value.loadData()
     }
 
@@ -56,6 +58,22 @@ class ListDrinksFragment : Fragment() {
                 is Resource.Failure -> Unit
             }.exhaustive
         })
+    }
+
+    private fun setupUnfavoriteObserver() {
+        viewModel.value.listDrinksFavoriteEvent.observe(viewLifecycleOwner, Observer { resource ->
+            when(resource){
+                is Resource.Loading -> Unit
+                is Resource.Success -> Unit
+                is Resource.Empty -> hideUnfavoritesView()
+                is Resource.Failure -> Unit
+            }.exhaustive
+        })
+    }
+
+    private fun hideUnfavoritesView() {
+        viewBinding.rvUnfavoriteDrinkList.gone()
+        viewBinding.tvTitleUnfavoriteDrinks.gone()
     }
 
     override fun onDestroyView() {
