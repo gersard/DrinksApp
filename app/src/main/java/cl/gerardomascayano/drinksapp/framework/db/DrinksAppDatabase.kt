@@ -27,6 +27,7 @@ abstract class DrinksAppDatabase : RoomDatabase() {
     abstract fun unitDao(): UnitDao
 
     companion object {
+        const val DATABASE_NAME = "drinks_app"
         private var instance: DrinksAppDatabase? = null
 
         private fun create(context: Context): DrinksAppDatabase =

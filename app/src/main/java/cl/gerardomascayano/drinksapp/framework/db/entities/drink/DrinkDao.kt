@@ -16,8 +16,12 @@ interface DrinkDao {
     suspend fun getDrinks(): List<DrinkEntity>
 
     @Transaction
-    @Query("SELECT * FROM DRINK")
-    suspend fun getDrinkWithIngredients(): List<DrinkWithIngredients>
+    @Query("SELECT * FROM DRINK WHERE favorite = 1")
+    suspend fun getDrinkWithIngredientsFavorite(): List<DrinkWithIngredients>
+
+    @Transaction
+    @Query("SELECT * FROM DRINK WHERE favorite = 0")
+    suspend fun getDrinkWithIngredientsUnfavorite(): List<DrinkWithIngredients>
 
 
 }

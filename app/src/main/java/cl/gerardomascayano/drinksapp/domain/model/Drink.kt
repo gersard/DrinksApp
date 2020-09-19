@@ -1,4 +1,4 @@
-package cl.gerardomascayano.drinksapp.domain
+package cl.gerardomascayano.drinksapp.domain.model
 
 data class Drink(
     val id: Int,
