@@ -8,7 +8,10 @@ import androidx.lifecycle.viewModelScope
 import cl.gerardomascayano.drinksapp.core.Resource
 import cl.gerardomascayano.drinksapp.domain.DrinkUseCase
 import cl.gerardomascayano.drinksapp.domain.model.Drink
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ListDrinksFragmentViewModel @ViewModelInject constructor(private val useCase: DrinkUseCase) : ViewModel() {
 
@@ -27,21 +30,26 @@ class ListDrinksFragmentViewModel @ViewModelInject constructor(private val useCa
 
             val favoriteDrinks = useCase.getAllFavoriteDrinks()
             _listDrinksFavoriteEvent.value = Resource.Loading(false)
-            if (favoriteDrinks.isNotEmpty()) {
-                _listDrinksFavoriteEvent.value = Resource.Success(favoriteDrinks)
-            } else {
-                _listDrinksFavoriteEvent.value = Resource.Empty()
-            }
 
+            withContext(Dispatchers.Main) {
+                if (favoriteDrinks.isNotEmpty()) {
+                    _listDrinksFavoriteEvent.value = Resource.Success(favoriteDrinks)
+                } else {
+                    _listDrinksFavoriteEvent.value = Resource.Empty()
+                }
+
+            }
 
             val unFavoriteDrinks = useCase.getAllUnFavoriteDrinks()
             _listDrinksUnFavoriteEvent.value = Resource.Loading(false)
-            if (unFavoriteDrinks.isNotEmpty()) {
-                _listDrinksUnFavoriteEvent.value = Resource.Success(unFavoriteDrinks)
-            } else {
-                _listDrinksUnFavoriteEvent.value = Resource.Empty()
-            }
+            withContext(Dispatchers.Main) {
+                if (unFavoriteDrinks.isNotEmpty()) {
+                    _listDrinksUnFavoriteEvent.value = Resource.Success(unFavoriteDrinks)
+                } else {
+                    _listDrinksUnFavoriteEvent.value = Resource.Empty()
+                }
 
+            }
         }
     }
 

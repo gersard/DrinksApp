@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cl.gerardomascayano.drinksapp.core.Resource
 import cl.gerardomascayano.drinksapp.core.extension.exhaustive
 import cl.gerardomascayano.drinksapp.core.extension.gone
+import cl.gerardomascayano.drinksapp.core.extension.visible
 import cl.gerardomascayano.drinksapp.databinding.FragmentListDrinksBinding
 import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.ui.list.adapter.ListDrinksAdapter
@@ -65,7 +66,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener {
     private fun setupFavoriteObserver() {
         viewModel.value.listDrinksFavoriteEvent.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
-                is Resource.Loading -> Unit
+                is Resource.Loading -> if (resource.isLoading) showProgressFavoriteDrinks() else hideProgressFavoriteDrinks()
                 is Resource.Success -> favoriteAdapterDrinks.addDrinks(resource.data)
                 is Resource.Empty -> Unit
                 is Resource.Failure -> Unit
@@ -76,7 +77,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener {
     private fun setupUnfavoriteObserver() {
         viewModel.value.listDrinksUnFavoriteEvent.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
-                is Resource.Loading -> Unit
+                is Resource.Loading -> if (resource.isLoading) showProgressUnFavoriteDrinks() else hideProgressUnFavoriteDrinks()
                 is Resource.Success -> unFavoriteAdapterDrinks.addDrinks(resource.data)
                 is Resource.Empty -> hideUnfavoritesView()
                 is Resource.Failure -> Unit
@@ -87,6 +88,26 @@ class ListDrinksFragment : Fragment(), DrinkItemListener {
     private fun hideUnfavoritesView() {
         viewBinding.rvUnfavoriteDrinkList.gone()
         viewBinding.tvTitleUnfavoriteDrinks.gone()
+    }
+
+    private fun showProgressUnFavoriteDrinks(){
+        viewBinding.rvUnfavoriteDrinkList.gone()
+        viewBinding.pbUnfavoriteDrinkList.visible()
+    }
+
+    private fun hideProgressUnFavoriteDrinks(){
+        viewBinding.rvUnfavoriteDrinkList.visible()
+        viewBinding.pbUnfavoriteDrinkList.gone()
+    }
+
+    private fun showProgressFavoriteDrinks(){
+        viewBinding.rvFavoriteDrinkList.gone()
+        viewBinding.pbFavoriteDrinkList.visible()
+    }
+
+    private fun hideProgressFavoriteDrinks(){
+        viewBinding.rvFavoriteDrinkList.visible()
+        viewBinding.pbFavoriteDrinkList.gone()
     }
 
     override fun onDestroyView() {
