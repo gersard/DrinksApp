@@ -6,7 +6,6 @@ import javax.inject.Inject
 
 class LocalDrinkDataSourceImpl @Inject constructor(private val drinksDao: DrinkDao) : DrinkDataSource {
 
-    override suspend fun getAllUnfavoriteDrinks(): List<DrinkWithIngredients> = drinksDao.getDrinkWithIngredientsFavorite()
-
-    override suspend fun getAllFavoriteDrinks(): List<DrinkWithIngredients> = drinksDao.getDrinkWithIngredientsUnfavorite()
+    override suspend fun getAllFavoriteDrinks(): List<DrinkWithIngredients> = drinksDao.getDrinkWithIngredientsFavorite()
+    override suspend fun getAllUnfavoriteDrinks(): List<DrinkWithIngredients> = drinksDao.getDrinkWithIngredientsUnfavorite()
 }

@@ -8,12 +8,26 @@ import cl.gerardomascayano.drinksapp.databinding.ItemDrinkBinding
 import cl.gerardomascayano.drinksapp.domain.model.Drink
 import timber.log.Timber
 
-class ListDrinksAdapter() : RecyclerView.Adapter<ListDrinksAdapter.DrinkListViewHolder>() {
+class ListDrinksAdapter(private val useGridLayoutManager: Boolean = false, screenWidth: Int = 0) : RecyclerView.Adapter<ListDrinksAdapter.DrinkListViewHolder>() {
 
     private var listDrinks: MutableList<Drink> = mutableListOf()
+    private var squareSize: Int? = null
+
+    init {
+        if (useGridLayoutManager) {
+            squareSize = screenWidth / 2
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrinkListViewHolder {
-        return DrinkListViewHolder(ItemDrinkBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        val viewBinding = ItemDrinkBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        if (useGridLayoutManager){
+            val lp = viewBinding.root.layoutParams
+            lp.width = squareSize!!
+            lp.height = squareSize!!
+            viewBinding.root.layoutParams = lp
+        }
+        return DrinkListViewHolder(viewBinding)
     }
 
     override fun getItemCount(): Int = listDrinks.size
@@ -38,8 +52,6 @@ class ListDrinksAdapter() : RecyclerView.Adapter<ListDrinksAdapter.DrinkListView
 //                .placeholder()
 //                .error()
                 .into(viewBinding.ivDrinkImage)
-
-            Timber.d("URL: ${drink.imageUrl}")
         }
 
     }
