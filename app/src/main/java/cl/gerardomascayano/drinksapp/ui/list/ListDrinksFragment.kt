@@ -16,12 +16,14 @@ import cl.gerardomascayano.drinksapp.core.Resource
 import cl.gerardomascayano.drinksapp.core.extension.exhaustive
 import cl.gerardomascayano.drinksapp.core.extension.gone
 import cl.gerardomascayano.drinksapp.databinding.FragmentListDrinksBinding
+import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.ui.list.adapter.ListDrinksAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 
 @AndroidEntryPoint
-class ListDrinksFragment : Fragment() {
+class ListDrinksFragment : Fragment(), DrinkItemListener {
 
     private val viewModel = viewModels<ListDrinksFragmentViewModel>()
     private var _viewBinding: FragmentListDrinksBinding? = null
@@ -48,14 +50,14 @@ class ListDrinksFragment : Fragment() {
     private fun setupUi() {
         viewBinding.rvFavoriteDrinkList.setHasFixedSize(true)
         viewBinding.rvFavoriteDrinkList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        favoriteAdapterDrinks = ListDrinksAdapter()
+        favoriteAdapterDrinks = ListDrinksAdapter(this)
         viewBinding.rvFavoriteDrinkList.adapter = favoriteAdapterDrinks
 
         viewBinding.rvUnfavoriteDrinkList.layoutManager = GridLayoutManager(context, 2)
         viewBinding.rvUnfavoriteDrinkList.post {
             val marginStart = viewBinding.rvUnfavoriteDrinkList.marginStart
             val marginEnd = viewBinding.rvUnfavoriteDrinkList.marginEnd
-            unFavoriteAdapterDrinks = ListDrinksAdapter(true, screenWidth() - (marginStart + marginEnd))
+            unFavoriteAdapterDrinks = ListDrinksAdapter(this,true, screenWidth() - (marginStart + marginEnd))
             viewBinding.rvUnfavoriteDrinkList.adapter = unFavoriteAdapterDrinks
         }
     }
@@ -98,8 +100,7 @@ class ListDrinksFragment : Fragment() {
         return displayMetrics.widthPixels
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = ListDrinksFragment()
+    override fun drinkItemClickListener(drink: Drink) {
+        Timber.d("Drink clicked: $drink")
     }
 }

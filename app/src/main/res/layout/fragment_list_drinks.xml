@@ -38,6 +38,7 @@
             android:id="@+id/rv_favorite_drink_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="@dimen/height_drink_list"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layoutAnimation="@anim/drink_list_item_animation" />

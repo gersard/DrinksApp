@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/width_drink_list"
     android:layout_height="@dimen/height_drink_list"
-    android:background="@color/transparent"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
@@ -19,7 +18,11 @@
         <ImageView
             android:id="@+id/iv_drink_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?selectableItemBackground"
+            tools:ignore="ContentDescription" />
 
     </com.google.android.material.card.MaterialCardView>
 
