@@ -1,53 +1,51 @@
-{
-  "drinks": [
-    {
-      "id": 1,
-      "name": "Piña Colada",
-      "image_url": "https://dam.cocinafacil.com.mx/wp-content/uploads/2019/01/pina-colada.jpg",
-      "rating": 5.0,
-      "favorite": true
-    },
-    {
-      "id": 2,
-      "name": "White Russian",
-      "image_url": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190816-white-russian-0119-landscape-pf-1568744178.jpg?crop=0.668xw:1.00xh;0.241xw,0&resize=480:*",
-      "rating": 3.0,
-      "favorite": false
-    },
-    {
-      "id": 3,
-      "name": "Margarita",
-      "image_url": "https://cdn5.recetasdeescandalo.com/wp-content/uploads/2018/09/Coctel-margarita-como-prepararlo.-Receta-e-ingredientes.jpg",
-      "rating": 2.0,
-      "favorite": false
-    },
-    {
-      "id": 4,
-      "name": "Pantera Rosa",
-      "image_url": "https://i.pinimg.com/originals/56/4e/74/564e749d04b22c2f8c23e69f82b04daf.jpg",
-      "rating": 4.0,
-      "favorite": true
-    },
-    {
-      "id": 5,
-      "name": "Manhattan",
-      "image_url": "https://recetasdecocteles.com/wp-content/uploads/2019/10/Manhattan.jpg",
-      "rating": 2.0,
-      "favorite": false
-    },
-    {
-      "id": 6,
-      "name": "Amaretto Cream",
-      "image_url": "https://4.bp.blogspot.com/-IUbOKuRYBNg/WOxAtZ4nxGI/AAAAAAAAci8/YjSKD-LQW-YvZxKuu7UMilE6RHh3AICyQCLcB/s1600/amaretto-cream-cocktail.jpg",
-      "rating": 4.0,
-      "favorite": true
-    },
-    {
-      "id": 7,
-      "name": "Dirty Banana",
-      "image_url": "https://4.bp.blogspot.com/-EdTHeQgdggs/Wir0dsy6kCI/AAAAAAAAdHM/gHcTAr2usTkghSH2tsDg3zufthPsLK5PgCLcBGAs/s1600/coctel-dirty-banana.jpg",
-      "rating": 1.0,
-      "favorite": false
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "name": "Piña Colada",
+    "image_url": "https://dam.cocinafacil.com.mx/wp-content/uploads/2019/01/pina-colada.jpg",
+    "rating": 5.0,
+    "favorite": true
+  },
+  {
+    "id": 2,
+    "name": "White Russian",
+    "image_url": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-190816-white-russian-0119-landscape-pf-1568744178.jpg?crop=0.668xw:1.00xh;0.241xw,0&resize=480:*",
+    "rating": 3.0,
+    "favorite": false
+  },
+  {
+    "id": 3,
+    "name": "Margarita",
+    "image_url": "https://cdn5.recetasdeescandalo.com/wp-content/uploads/2018/09/Coctel-margarita-como-prepararlo.-Receta-e-ingredientes.jpg",
+    "rating": 2.0,
+    "favorite": false
+  },
+  {
+    "id": 4,
+    "name": "Pantera Rosa",
+    "image_url": "https://i.pinimg.com/originals/56/4e/74/564e749d04b22c2f8c23e69f82b04daf.jpg",
+    "rating": 4.0,
+    "favorite": true
+  },
+  {
+    "id": 5,
+    "name": "Manhattan",
+    "image_url": "https://recetasdecocteles.com/wp-content/uploads/2019/10/Manhattan.jpg",
+    "rating": 2.0,
+    "favorite": false
+  },
+  {
+    "id": 6,
+    "name": "Amaretto Cream",
+    "image_url": "https://4.bp.blogspot.com/-IUbOKuRYBNg/WOxAtZ4nxGI/AAAAAAAAci8/YjSKD-LQW-YvZxKuu7UMilE6RHh3AICyQCLcB/s1600/amaretto-cream-cocktail.jpg",
+    "rating": 4.0,
+    "favorite": true
+  },
+  {
+    "id": 7,
+    "name": "Dirty Banana",
+    "image_url": "https://4.bp.blogspot.com/-EdTHeQgdggs/Wir0dsy6kCI/AAAAAAAAdHM/gHcTAr2usTkghSH2tsDg3zufthPsLK5PgCLcBGAs/s1600/coctel-dirty-banana.jpg",
+    "rating": 1.0,
+    "favorite": false
+  }
+]

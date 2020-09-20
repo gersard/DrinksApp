@@ -17,6 +17,9 @@ interface IngredientDao {
     @Insert(onConflict = REPLACE)
     suspend fun addAllDetailIngredients(detailIngredients: List<IngredientDetailEntity>)
 
+    @Insert(onConflict = REPLACE)
+    suspend fun addDetailIngredient(detailIngredient: IngredientDetailEntity)
+
     @Query("SELECT * FROM ingredient")
     suspend fun getIngredients(): List<IngredientEntity>
 

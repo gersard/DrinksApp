@@ -12,4 +12,6 @@ interface UnitDao {
     @Insert(onConflict = REPLACE)
     suspend fun addAllUnit(units: List<UnitEntity>)
 
+    @Insert(onConflict = REPLACE)
+    suspend fun addUnit(unit: UnitEntity)
 }
