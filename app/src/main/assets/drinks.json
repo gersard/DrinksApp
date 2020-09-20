@@ -47,5 +47,19 @@
     "image_url": "https://4.bp.blogspot.com/-EdTHeQgdggs/Wir0dsy6kCI/AAAAAAAAdHM/gHcTAr2usTkghSH2tsDg3zufthPsLK5PgCLcBGAs/s1600/coctel-dirty-banana.jpg",
     "rating": 1.0,
     "favorite": false
+  },
+  {
+    "id": 8,
+    "name": "Capirinha",
+    "image_url": "https://www.recetasderechupete.com/wp-content/uploads/2016/04/caipirinha.jpg",
+    "rating": 1.0,
+    "favorite": false
+  },
+  {
+    "id": 9,
+    "name": "Martini",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/15-09-26-RalfR-WLC-0084.jpg",
+    "rating": 1.0,
+    "favorite": false
   }
 ]

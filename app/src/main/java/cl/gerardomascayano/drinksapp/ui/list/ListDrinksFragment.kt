@@ -58,7 +58,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener {
         viewBinding.rvUnfavoriteDrinkList.post {
             val marginStart = viewBinding.rvUnfavoriteDrinkList.marginStart
             val marginEnd = viewBinding.rvUnfavoriteDrinkList.marginEnd
-            unFavoriteAdapterDrinks = ListDrinksAdapter(this,true, screenWidth() - (marginStart + marginEnd))
+            unFavoriteAdapterDrinks = ListDrinksAdapter(this, true, screenWidth() - (marginStart + marginEnd))
             viewBinding.rvUnfavoriteDrinkList.adapter = unFavoriteAdapterDrinks
         }
     }
@@ -74,11 +74,12 @@ class ListDrinksFragment : Fragment(), DrinkItemListener {
         })
     }
 
+    @Suppress("IMPLICIT_CAST_TO_ANY")
     private fun setupUnfavoriteObserver() {
         viewModel.value.listDrinksUnFavoriteEvent.observe(viewLifecycleOwner, Observer { resource ->
             when (resource) {
                 is Resource.Loading -> if (resource.isLoading) showProgressUnFavoriteDrinks() else hideProgressUnFavoriteDrinks()
-                is Resource.Success -> unFavoriteAdapterDrinks.addDrinks(resource.data)
+                is Resource.Success -> viewBinding.rvUnfavoriteDrinkList.post { unFavoriteAdapterDrinks.addDrinks(resource.data) }
                 is Resource.Empty -> hideUnfavoritesView()
                 is Resource.Failure -> Unit
             }.exhaustive
@@ -90,22 +91,22 @@ class ListDrinksFragment : Fragment(), DrinkItemListener {
         viewBinding.tvTitleUnfavoriteDrinks.gone()
     }
 
-    private fun showProgressUnFavoriteDrinks(){
+    private fun showProgressUnFavoriteDrinks() {
         viewBinding.rvUnfavoriteDrinkList.gone()
         viewBinding.pbUnfavoriteDrinkList.visible()
     }
 
-    private fun hideProgressUnFavoriteDrinks(){
+    private fun hideProgressUnFavoriteDrinks() {
         viewBinding.rvUnfavoriteDrinkList.visible()
         viewBinding.pbUnfavoriteDrinkList.gone()
     }
 
-    private fun showProgressFavoriteDrinks(){
+    private fun showProgressFavoriteDrinks() {
         viewBinding.rvFavoriteDrinkList.gone()
         viewBinding.pbFavoriteDrinkList.visible()
     }
 
-    private fun hideProgressFavoriteDrinks(){
+    private fun hideProgressFavoriteDrinks() {
         viewBinding.rvFavoriteDrinkList.visible()
         viewBinding.pbFavoriteDrinkList.gone()
     }

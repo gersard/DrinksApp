@@ -108,5 +108,30 @@
     "id": 23,
     "name": "Lemon Juice",
     "has_alcohol": false
+  },
+  {
+    "id": 24,
+    "name": "Cachaza",
+    "has_alcohol": true
+  },
+  {
+    "id": 25,
+    "name": "Lemon",
+    "has_alcohol": false
+  },
+  {
+    "id": 26,
+    "name": "Sugar",
+    "has_alcohol": false
+  },
+  {
+    "id": 27,
+    "name": "Gin",
+    "has_alcohol": true
+  },
+  {
+    "id": 28,
+    "name": "Vermouth",
+    "has_alcohol": true
   }
 ]
