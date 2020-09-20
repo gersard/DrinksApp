@@ -1,0 +1,207 @@
+{
+  "ingredients_detail": [
+    {
+      "id": 0,
+      "quantity": "3",
+      "ingredient_id": 1,
+      "drink_id": 1,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "3",
+      "ingredient_id": 2,
+      "drink_id": 1,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "2",
+      "ingredient_id": 3,
+      "drink_id": 1,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1.5",
+      "ingredient_id": 4,
+      "drink_id": 2,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1",
+      "ingredient_id": 6,
+      "drink_id": 2,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1",
+      "ingredient_id": 5,
+      "drink_id": 2,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "0",
+      "ingredient_id": 7,
+      "drink_id": 2,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "2",
+      "ingredient_id": 8,
+      "drink_id": 3,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1",
+      "ingredient_id": 9,
+      "drink_id": 3,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1",
+      "ingredient_id": 23,
+      "drink_id": 3,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "100",
+      "ingredient_id": 6,
+      "drink_id": 4,
+      "unit_id": 1
+    },
+    {
+      "id": 0,
+      "quantity": "50",
+      "ingredient_id": 11,
+      "drink_id": 4,
+      "unit_id": 1
+    },
+    {
+      "id": 0,
+      "quantity": "50",
+      "ingredient_id": 12,
+      "drink_id": 4,
+      "unit_id": 1
+    },
+    {
+      "id": 0,
+      "quantity": "100",
+      "ingredient_id": 2,
+      "drink_id": 4,
+      "unit_id": 1
+    },
+    {
+      "id": 0,
+      "quantity": "50",
+      "ingredient_id": 3,
+      "drink_id": 4,
+      "unit_id": 1
+    },
+    {
+      "id": 0,
+      "quantity": "2.5",
+      "ingredient_id": 14,
+      "drink_id": 5,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1",
+      "ingredient_id": 15,
+      "drink_id": 5,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "0",
+      "ingredient_id": 16,
+      "drink_id": 5,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "2",
+      "ingredient_id": 6,
+      "drink_id": 6,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "0.5",
+      "ingredient_id": 18,
+      "drink_id": 6,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "2.5",
+      "ingredient_id": 17,
+      "drink_id": 6,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "2.5",
+      "ingredient_id": 13,
+      "drink_id": 6,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "0",
+      "ingredient_id": 19,
+      "drink_id": 6,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1",
+      "ingredient_id": 20,
+      "drink_id": 7,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1",
+      "ingredient_id": 6,
+      "drink_id": 7,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1",
+      "ingredient_id": 21,
+      "drink_id": 7,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1",
+      "ingredient_id": 5,
+      "drink_id": 7,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "1.5",
+      "ingredient_id": 3,
+      "drink_id": 7,
+      "unit_id": 2
+    },
+    {
+      "id": 0,
+      "quantity": "0",
+      "ingredient_id": 22,
+      "drink_id": 7,
+      "unit_id": 2
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "ingredients": [
+    {
+      "id": 1,
+      "name": "Coconut Cream",
+      "has_alcohol": false
+    },
+    {
+      "id": 2,
+      "name": "Pineapple Juice",
+      "has_alcohol": false
+    },
+    {
+      "id": 3,
+      "name": "White Rum",
+      "has_alcohol": true
+    },
+    {
+      "id": 4,
+      "name": "Vodka",
+      "has_alcohol": true
+    },
+    {
+      "id": 5,
+      "name": "Kahlúa",
+      "has_alcohol": true
+    },
+    {
+      "id": 6,
+      "name": "Heavy Cream",
+      "has_alcohol": false
+    },
+    {
+      "id": 7,
+      "name": "Ice",
+      "has_alcohol": false
+    },
+    {
+      "id": 8,
+      "name": "Tequila",
+      "has_alcohol": true
+    },
+    {
+      "id": 9,
+      "name": "Triple Sec",
+      "has_alcohol": true
+    },
+    {
+      "id": 11,
+      "name": "Grenadine",
+      "has_alcohol": true
+    },
+    {
+      "id": 12,
+      "name": "Sugar Syrup",
+      "has_alcohol": false
+    },
+    {
+      "id": 13,
+      "name": "Coconut Rum",
+      "has_alcohol": true
+    },
+    {
+      "id": 14,
+      "name": "Bourbon",
+      "has_alcohol": true
+    },
+    {
+      "id": 15,
+      "name": "Red Vermouth",
+      "has_alcohol": true
+    },
+    {
+      "id": 16,
+      "name": "Angostura Bitter",
+      "has_alcohol": false
+    },
+    {
+      "id": 17,
+      "name": "Amaretto",
+      "has_alcohol": true
+    },
+    {
+      "id": 18,
+      "name": "Almond Milk",
+      "has_alcohol": false
+    },
+    {
+      "id": 19,
+      "name": "Chocolate Bitter",
+      "has_alcohol": false
+    },
+    {
+      "id": 20,
+      "name": "Milk",
+      "has_alcohol": false
+    },
+    {
+      "id": 21,
+      "name": "Banana liqueur",
+      "has_alcohol": true
+    },
+    {
+      "id": 22,
+      "name": "Banana",
+      "has_alcohol": false
+    },
+    {
+      "id": 23,
+      "name": "Lemon Juice",
+      "has_alcohol": false
+    }
+  ]
+}
