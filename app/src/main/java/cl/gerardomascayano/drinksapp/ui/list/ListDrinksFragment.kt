@@ -1,8 +1,10 @@
 package cl.gerardomascayano.drinksapp.ui.list
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.marginEnd
@@ -12,10 +14,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cl.gerardomascayano.drinksapp.core.Resource
-import cl.gerardomascayano.drinksapp.core.extension.exhaustive
-import cl.gerardomascayano.drinksapp.core.extension.gone
-import cl.gerardomascayano.drinksapp.core.extension.visible
+import cl.gerardomascayano.drinksapp.core.extension.*
 import cl.gerardomascayano.drinksapp.databinding.FragmentListDrinksBinding
 import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.ui.list.adapter.ListDrinksAdapter
@@ -24,11 +25,12 @@ import timber.log.Timber
 
 
 @AndroidEntryPoint
-class ListDrinksFragment : Fragment(), DrinkItemListener {
+class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener {
 
     private val viewModel = viewModels<ListDrinksFragmentViewModel>()
     private var _viewBinding: FragmentListDrinksBinding? = null
     private val viewBinding get() = _viewBinding!!
+    private var rvSearchListResults: RecyclerView? = null
     private lateinit var favoriteAdapterDrinks: ListDrinksAdapter
     private lateinit var unFavoriteAdapterDrinks: ListDrinksAdapter
 
@@ -48,6 +50,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener {
         viewModel.value.loadData()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setupUi() {
         viewBinding.rvFavoriteDrinkList.setHasFixedSize(true)
         viewBinding.rvFavoriteDrinkList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -61,6 +64,8 @@ class ListDrinksFragment : Fragment(), DrinkItemListener {
             unFavoriteAdapterDrinks = ListDrinksAdapter(this, true, screenWidth() - (marginStart + marginEnd))
             viewBinding.rvUnfavoriteDrinkList.adapter = unFavoriteAdapterDrinks
         }
+
+        viewBinding.etSearchDrinks.setOnTouchListener(this)
     }
 
     private fun setupFavoriteObserver() {
@@ -124,5 +129,21 @@ class ListDrinksFragment : Fragment(), DrinkItemListener {
 
     override fun drinkItemClickListener(drink: Drink) {
         Timber.d("Drink clicked: $drink")
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        if (v?.id == viewBinding.etSearchDrinks.id && event?.action == MotionEvent.ACTION_UP) {
+            v.changeWidth(v.width, screenWidth() - (20.dpToPx()))
+            showSearchResultsView()
+        }
+        return v!!.onTouchEvent(event)
+    }
+
+    private fun showSearchResultsView() {
+        if (rvSearchListResults == null) {
+            rvSearchListResults = viewBinding.vsSearchDrinks.inflate() as RecyclerView
+            rvSearchListResults!!.visible(true)
+        }
     }
 }

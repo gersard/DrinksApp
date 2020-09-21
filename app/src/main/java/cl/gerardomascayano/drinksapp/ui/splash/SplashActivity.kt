@@ -27,7 +27,6 @@ class SplashActivity : AppCompatActivity() {
 //        insertInitialData()
         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
         finish()
-
     }
 
     private fun insertInitialData() = lifecycleScope.launch {
