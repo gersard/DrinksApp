@@ -1,5 +1,6 @@
 package cl.gerardomascayano.drinksapp.ui.list
 
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -15,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cl.gerardomascayano.drinksapp.core.OnFragmentBackPressed
 import cl.gerardomascayano.drinksapp.core.Resource
 import cl.gerardomascayano.drinksapp.core.extension.*
 import cl.gerardomascayano.drinksapp.databinding.FragmentListDrinksBinding
@@ -25,7 +27,7 @@ import timber.log.Timber
 
 
 @AndroidEntryPoint
-class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener {
+class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, OnFragmentBackPressed {
 
     private val viewModel = viewModels<ListDrinksFragmentViewModel>()
     private var _viewBinding: FragmentListDrinksBinding? = null
@@ -48,6 +50,11 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener {
         setupFavoriteObserver()
         setupUnfavoriteObserver()
         viewModel.value.loadData()
+
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            ListDrinksBackPressedCallback(true, activity, this) { rvSearchListResults != null && rvSearchListResults?.isVisible() == true })
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -135,6 +142,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener {
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
         if (v?.id == viewBinding.etSearchDrinks.id && event?.action == MotionEvent.ACTION_UP) {
             v.changeWidth(v.width, screenWidth() - (20.dpToPx()))
+            viewBinding.etSearchDrinks.changeElevation(6.dpToPx().toFloat(), 10.dpToPx().toFloat())
             showSearchResultsView()
         }
         return v!!.onTouchEvent(event)
@@ -143,7 +151,18 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener {
     private fun showSearchResultsView() {
         if (rvSearchListResults == null) {
             rvSearchListResults = viewBinding.vsSearchDrinks.inflate() as RecyclerView
-            rvSearchListResults!!.visible(true)
         }
+        rvSearchListResults!!.visible(true)
+    }
+
+    private fun hideSearchResultsView() {
+        rvSearchListResults?.gone(true)
+    }
+
+    override fun onFragmentBackPressed() {
+        viewBinding.etSearchDrinks.changeWidth(viewBinding.etSearchDrinks.width, screenWidth() - (40.dpToPx()), 300)
+        viewBinding.etSearchDrinks.changeElevation(10.dpToPx().toFloat(), 6.dpToPx().toFloat())
+        hideSearchResultsView()
+        viewBinding.root.requestLayout()
     }
 }

@@ -4,23 +4,30 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.core.animation.addListener
 
 
 fun View.visible(withAnimation: Boolean = false, duration: Long = 300) {
-    if (this.visibility != View.VISIBLE) this.visibility = View.VISIBLE
     if (withAnimation) {
         ObjectAnimator.ofFloat(this, "alpha", 0f, 1f)
             .setDuration(duration)
             .start()
     }
+    if (this.visibility != View.VISIBLE) this.visibility = View.VISIBLE
 }
 
 fun View.gone(withAnimation: Boolean = false) {
-    if (this.visibility != View.GONE) this.visibility = View.GONE
     if (withAnimation) {
-        ObjectAnimator.ofFloat(this, "alpha", 1f, 0f)
+        val animator = ObjectAnimator.ofFloat(this, "alpha", 1f, 0f)
             .setDuration(300)
-            .start()
+
+        animator.addListener(onEnd = {
+            if (this.visibility != View.GONE) this.visibility = View.GONE
+        })
+        animator.start()
+
+    } else {
+        if (this.visibility != View.GONE) this.visibility = View.GONE
     }
 }
 
@@ -36,7 +43,7 @@ fun View.isVisible(): Boolean = this.visibility == View.VISIBLE
 //        .start()
 //}
 
-fun View.changeWidth(fromValue: Int, toValue: Int, duration: Long = 300, animateElevation: Boolean = false) {
+fun View.changeWidth(fromValue: Int, toValue: Int, duration: Long = 300) {
     val valueAnimator = ValueAnimator
         .ofInt(fromValue, toValue)
         .setDuration(duration)
@@ -50,11 +57,11 @@ fun View.changeWidth(fromValue: Int, toValue: Int, duration: Long = 300, animate
     }
     valueAnimator.start()
 
-    if (animateElevation) {
-        ObjectAnimator
-            .ofFloat(this, "elevation", 6.dpToPx().toFloat(), 10.dpToPx().toFloat())
-            .setDuration(duration)
-            .start()
-    }
+}
 
+fun View.changeElevation(fromValue: Float, toValue: Float, duration: Long = 300) {
+    ObjectAnimator
+        .ofFloat(this, "elevation", fromValue, toValue)
+        .setDuration(duration)
+        .start()
 }
