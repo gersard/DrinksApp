@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.fragment.app.Fragment
@@ -68,7 +69,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         viewBinding.rvUnfavoriteDrinkList.post {
             val marginStart = viewBinding.rvUnfavoriteDrinkList.marginStart
             val marginEnd = viewBinding.rvUnfavoriteDrinkList.marginEnd
-            unFavoriteAdapterDrinks = ListDrinksAdapter(this, true, screenWidth() - (marginStart + marginEnd))
+            unFavoriteAdapterDrinks = ListDrinksAdapter(this, true, requireActivity().screenWidth() - (marginStart + marginEnd))
             viewBinding.rvUnfavoriteDrinkList.adapter = unFavoriteAdapterDrinks
         }
 
@@ -128,20 +129,14 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         _viewBinding = null
     }
 
-    private fun screenWidth(): Int {
-        val displayMetrics = DisplayMetrics()
-        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
-        return displayMetrics.widthPixels
-    }
-
     override fun drinkItemClickListener(drink: Drink) {
         Timber.d("Drink clicked: $drink")
     }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-        if (v?.id == viewBinding.etSearchDrinks.id && event?.action == MotionEvent.ACTION_UP) {
-            v.changeWidth(v.width, screenWidth() - (20.dpToPx()))
+        if (v?.id == viewBinding.etSearchDrinks.id && event?.action == MotionEvent.ACTION_UP && !(rvSearchListResults?.isVisible() == true)) {
+            v.changeWidth(v.width, requireActivity().screenWidth() - (32.dpToPx()))
             viewBinding.etSearchDrinks.changeElevation(6.dpToPx().toFloat(), 10.dpToPx().toFloat())
             showSearchResultsView()
         }
@@ -160,7 +155,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     }
 
     override fun onFragmentBackPressed() {
-        viewBinding.etSearchDrinks.changeWidth(viewBinding.etSearchDrinks.width, screenWidth() - (40.dpToPx()), 300)
+        viewBinding.etSearchDrinks.changeWidth(viewBinding.etSearchDrinks.width, requireActivity().screenWidth() - (64.dpToPx()), 300)
         viewBinding.etSearchDrinks.changeElevation(10.dpToPx().toFloat(), 6.dpToPx().toFloat())
         hideSearchResultsView()
         viewBinding.root.requestLayout()
