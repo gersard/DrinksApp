@@ -61,5 +61,12 @@
     "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/15-09-26-RalfR-WLC-0084.jpg",
     "rating": 1.0,
     "favorite": false
+  },
+  {
+    "id": 10,
+    "name": "Tiramisu Cocktail",
+    "image_url": "https://i.pinimg.com/originals/49/28/bc/4928bcf3f15612f2ba4631c6a52efc80.jpg",
+    "rating": 3.0,
+    "favorite": true
   }
 ]

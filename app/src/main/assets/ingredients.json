@@ -133,5 +133,10 @@
     "id": 28,
     "name": "Vermouth",
     "has_alcohol": true
+  },
+  {
+    "id": 29,
+    "name": "Cheese Cream",
+    "has_alcohol": false
   }
 ]

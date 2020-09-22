@@ -236,5 +236,33 @@
     "ingredient_id": 28,
     "drink_id": 9,
     "unit_id": 2
+  },
+  {
+    "id": 0,
+    "quantity": "2",
+    "ingredient_id": 29,
+    "drink_id": 10,
+    "unit_id": 1
+  },
+  {
+    "id": 0,
+    "quantity": "45",
+    "ingredient_id": 6,
+    "drink_id": 10,
+    "unit_id": 1
+  },
+  {
+    "id": 0,
+    "quantity": "45",
+    "ingredient_id": 5,
+    "drink_id": 10,
+    "unit_id": 1
+  },
+  {
+    "id": 0,
+    "quantity": "45",
+    "ingredient_id": 4,
+    "drink_id": 10,
+    "unit_id": 1
   }
 ]
