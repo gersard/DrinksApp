@@ -1,18 +1,18 @@
-package cl.gerardomascayano.drinksapp.framework.db
+package cl.gerardomascayano.drinksapp.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import cl.gerardomascayano.drinksapp.framework.db.entities.drink.DrinkDao
-import cl.gerardomascayano.drinksapp.framework.db.entities.drink.DrinkEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.ingredient.IngredientDao
-import cl.gerardomascayano.drinksapp.framework.db.entities.ingredient.IngredientDetailEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.ingredient.IngredientEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.step.StepDao
-import cl.gerardomascayano.drinksapp.framework.db.entities.step.StepEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.unit.UnitDao
-import cl.gerardomascayano.drinksapp.framework.db.entities.unit.UnitEntity
+import cl.gerardomascayano.drinksapp.data.db.entities.drink.DrinkDao
+import cl.gerardomascayano.drinksapp.data.db.entities.drink.DrinkEntity
+import cl.gerardomascayano.drinksapp.data.db.entities.ingredient.IngredientDao
+import cl.gerardomascayano.drinksapp.data.db.entities.ingredient.IngredientDetailEntity
+import cl.gerardomascayano.drinksapp.data.db.entities.ingredient.IngredientEntity
+import cl.gerardomascayano.drinksapp.data.db.entities.step.StepDao
+import cl.gerardomascayano.drinksapp.data.db.entities.step.StepEntity
+import cl.gerardomascayano.drinksapp.data.db.entities.unit.UnitDao
+import cl.gerardomascayano.drinksapp.data.db.entities.unit.UnitEntity
 
 @Database(
     entities = [DrinkEntity::class, IngredientEntity::class, StepEntity::class, UnitEntity::class, IngredientDetailEntity::class],

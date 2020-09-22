@@ -2,18 +2,8 @@ package cl.gerardomascayano.drinksapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.lifecycleScope
 import cl.gerardomascayano.drinksapp.R
-import cl.gerardomascayano.drinksapp.framework.db.DrinksAppDatabase
-import cl.gerardomascayano.drinksapp.framework.db.entities.drink.DrinkEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.ingredient.IngredientDetailEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.ingredient.IngredientEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.step.StepEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.unit.UnitEntity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

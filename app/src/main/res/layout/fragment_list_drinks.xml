@@ -26,6 +26,8 @@
             android:hint="@string/hint_search_drinks"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
+            android:inputType="textFilter"
+            android:imeOptions="actionDone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

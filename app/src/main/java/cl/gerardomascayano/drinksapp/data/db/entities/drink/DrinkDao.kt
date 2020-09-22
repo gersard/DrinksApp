@@ -1,4 +1,4 @@
-package cl.gerardomascayano.drinksapp.framework.db.entities.drink
+package cl.gerardomascayano.drinksapp.data.db.entities.drink
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -12,8 +12,8 @@ interface DrinkDao {
     @Insert(onConflict = REPLACE)
     suspend fun addDrink(drink: DrinkEntity): Long
 
-    @Query("SELECT * FROM DRINK")
-    suspend fun getDrinks(): List<DrinkEntity>
+    @Query("SELECT name, image_url FROM DRINK WHERE name LIKE '%' || :name || '%'")
+    suspend fun getDrinksByName(name: String): List<DrinkSearchTuple>
 
     @Transaction
     @Query("SELECT * FROM DRINK WHERE favorite = 1")

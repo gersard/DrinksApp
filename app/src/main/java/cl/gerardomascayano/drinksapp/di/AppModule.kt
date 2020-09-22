@@ -2,7 +2,7 @@ package cl.gerardomascayano.drinksapp.di
 
 import android.content.Context
 import androidx.room.Room
-import cl.gerardomascayano.drinksapp.framework.db.DrinksAppDatabase
+import cl.gerardomascayano.drinksapp.data.db.DrinksAppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,10 +1,8 @@
-package cl.gerardomascayano.drinksapp.framework.db.entities.step
+package cl.gerardomascayano.drinksapp.data.db.entities.step
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
-import androidx.room.Query
-import androidx.room.Transaction
 
 @Dao
 interface StepDao {

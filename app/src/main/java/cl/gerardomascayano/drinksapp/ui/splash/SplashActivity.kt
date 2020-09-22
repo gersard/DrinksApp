@@ -4,12 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import cl.gerardomascayano.drinksapp.framework.db.DrinksAppDatabase
-import cl.gerardomascayano.drinksapp.framework.db.entities.drink.DrinkEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.ingredient.IngredientDetailEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.ingredient.IngredientEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.step.StepEntity
-import cl.gerardomascayano.drinksapp.framework.db.entities.unit.UnitEntity
+import cl.gerardomascayano.drinksapp.data.db.DrinksAppDatabase
+import cl.gerardomascayano.drinksapp.data.db.entities.drink.DrinkEntity
+import cl.gerardomascayano.drinksapp.data.db.entities.ingredient.IngredientDetailEntity
+import cl.gerardomascayano.drinksapp.data.db.entities.ingredient.IngredientEntity
+import cl.gerardomascayano.drinksapp.data.db.entities.unit.UnitEntity
 import cl.gerardomascayano.drinksapp.ui.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

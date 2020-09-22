@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class ListDrinksFragmentViewModel @ViewModelInject constructor(private val useCase: DrinkUseCase) : ViewModel() {
 
@@ -50,6 +51,12 @@ class ListDrinksFragmentViewModel @ViewModelInject constructor(private val useCa
                 }
 
             }
+        }
+    }
+
+    fun searchDrinksByName(name: String) {
+        viewModelScope.launch {
+            val drinksNames = useCase.getDrinksByName(name)
         }
     }
 

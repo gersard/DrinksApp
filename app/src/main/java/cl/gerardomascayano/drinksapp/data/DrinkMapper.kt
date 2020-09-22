@@ -1,9 +1,9 @@
-package cl.gerardomascayano.drinksapp.framework.data
+package cl.gerardomascayano.drinksapp.data
 
 import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.domain.model.Ingredient
 import cl.gerardomascayano.drinksapp.domain.model.Unit
-import cl.gerardomascayano.drinksapp.framework.db.entities.drink.DrinkWithIngredients
+import cl.gerardomascayano.drinksapp.data.db.entities.drink.DrinkWithIngredients
 
 class DrinkMapper() {
 

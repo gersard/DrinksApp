@@ -1,4 +1,4 @@
-package cl.gerardomascayano.drinksapp.framework.db.entities.unit
+package cl.gerardomascayano.drinksapp.data.db.entities.unit
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

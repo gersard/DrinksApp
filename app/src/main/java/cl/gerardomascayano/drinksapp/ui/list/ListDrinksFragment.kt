@@ -3,6 +3,8 @@ package cl.gerardomascayano.drinksapp.ui.list
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -28,7 +30,7 @@ import timber.log.Timber
 
 
 @AndroidEntryPoint
-class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, OnFragmentBackPressed {
+class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, OnFragmentBackPressed, TextWatcher {
 
     private val viewModel = viewModels<ListDrinksFragmentViewModel>()
     private var _viewBinding: FragmentListDrinksBinding? = null
@@ -74,6 +76,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         }
 
         viewBinding.etSearchDrinks.setOnTouchListener(this)
+        viewBinding.etSearchDrinks.addTextChangedListener(this)
     }
 
     private fun setupFavoriteObserver() {
@@ -135,7 +138,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-        if (v?.id == viewBinding.etSearchDrinks.id && event?.action == MotionEvent.ACTION_UP && !(rvSearchListResults?.isVisible() == true)) {
+        if (v?.id == viewBinding.etSearchDrinks.id && event?.action == MotionEvent.ACTION_UP && rvSearchListResults?.isVisible() != true) {
             v.changeWidth(v.width, requireActivity().screenWidth() - (32.dpToPx()))
             viewBinding.etSearchDrinks.changeElevation(6.dpToPx().toFloat(), 10.dpToPx().toFloat())
             showSearchResultsView()
@@ -159,5 +162,17 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         viewBinding.etSearchDrinks.changeElevation(10.dpToPx().toFloat(), 6.dpToPx().toFloat())
         hideSearchResultsView()
         viewBinding.root.requestLayout()
+    }
+
+    override fun afterTextChanged(s: Editable?) {
+        viewModel.value.searchDrinksByName(s!!.toString())
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
     }
 }
