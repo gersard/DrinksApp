@@ -20,6 +20,6 @@ class DrinkRepositoryImpl @Inject constructor(private val dataSource: DrinkDataS
     }
 
     override suspend fun getAllDrinksByName(name: String): List<DrinkSearch> {
-        return dataSource.getDrinksByName(name).map { DrinkSearch(it.name, it.imageUrl) }
+        return dataSource.getDrinksByName(name).map { DrinkSearch(it.id, it.name, it.imageUrl) }
     }
 }

@@ -25,6 +25,7 @@ import cl.gerardomascayano.drinksapp.core.extension.*
 import cl.gerardomascayano.drinksapp.databinding.FragmentListDrinksBinding
 import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.ui.list.adapter.ListDrinksAdapter
+import cl.gerardomascayano.drinksapp.ui.list.adapter.ListDrinksSearchAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -38,6 +39,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     private var rvSearchListResults: RecyclerView? = null
     private lateinit var favoriteAdapterDrinks: ListDrinksAdapter
     private lateinit var unFavoriteAdapterDrinks: ListDrinksAdapter
+    private var drinksSearchAdapter: ListDrinksSearchAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +54,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         setupUi()
         setupFavoriteObserver()
         setupUnfavoriteObserver()
+        setupSearchedObservers()
         viewModel.value.loadData()
 
         activity?.onBackPressedDispatcher?.addCallback(
@@ -59,6 +62,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
             ListDrinksBackPressedCallback(true, activity, this) { rvSearchListResults != null && rvSearchListResults?.isVisible() == true })
 
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupUi() {
@@ -102,6 +106,18 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         })
     }
 
+    private fun setupSearchedObservers() {
+        viewModel.value.listDrinksSearched.observe(viewLifecycleOwner, Observer { resource ->
+            when (resource) {
+                is Resource.Loading -> TODO()
+                is Resource.Success -> drinksSearchAdapter!!.setDrinks(resource.data)
+                is Resource.Empty -> Unit
+                is Resource.Failure -> TODO()
+            }.exhaustive
+
+        })
+    }
+
     private fun hideUnfavoritesView() {
         viewBinding.rvUnfavoriteDrinkList.gone()
         viewBinding.tvTitleUnfavoriteDrinks.gone()
@@ -132,8 +148,8 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         _viewBinding = null
     }
 
-    override fun drinkItemClickListener(drink: Drink) {
-        Timber.d("Drink clicked: $drink")
+    override fun drinkItemClickListener(drinkId: Int) {
+        Timber.d("Drink clicked: $drinkId")
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -149,6 +165,9 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     private fun showSearchResultsView() {
         if (rvSearchListResults == null) {
             rvSearchListResults = viewBinding.vsSearchDrinks.inflate() as RecyclerView
+            rvSearchListResults!!.layoutManager = LinearLayoutManager(requireContext())
+            this.drinksSearchAdapter = ListDrinksSearchAdapter(this)
+            rvSearchListResults!!.adapter = drinksSearchAdapter
         }
         rvSearchListResults!!.visible(true)
     }

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cl.gerardomascayano.drinksapp.core.GlideApp
+import cl.gerardomascayano.drinksapp.core.extension.loadImage
 import cl.gerardomascayano.drinksapp.databinding.ItemDrinkBinding
 import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.ui.list.DrinkItemListener
@@ -57,17 +58,12 @@ class ListDrinksAdapter(private val drinkListener: DrinkItemListener, private va
 
         fun bindDrink(drink: Drink) {
             viewBinding.tvDrinkTitle.text = drink.name
-            GlideApp.with(viewBinding.root.context)
-                .load(drink.imageUrl)
-                .centerCrop()
-//                .placeholder()
-//                .error()
-                .into(viewBinding.ivDrinkImage)
+            viewBinding.ivDrinkImage.loadImage(drink.imageUrl)
         }
 
         override fun onClick(v: View?) {
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                drinkListener.drinkItemClickListener(listDrinks[adapterPosition])
+                drinkListener.drinkItemClickListener(listDrinks[adapterPosition].id)
             }
         }
 

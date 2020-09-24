@@ -12,7 +12,7 @@ interface DrinkDao {
     @Insert(onConflict = REPLACE)
     suspend fun addDrink(drink: DrinkEntity): Long
 
-    @Query("SELECT name, image_url FROM DRINK WHERE name LIKE '%' || :name || '%'")
+    @Query("SELECT drinkId as id, name, image_url FROM DRINK WHERE name LIKE '%' || :name || '%'")
     suspend fun getDrinksByName(name: String): List<DrinkSearchTuple>
 
     @Transaction

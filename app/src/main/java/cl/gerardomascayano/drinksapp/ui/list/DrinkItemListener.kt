@@ -4,6 +4,6 @@ import cl.gerardomascayano.drinksapp.domain.model.Drink
 
 interface DrinkItemListener {
 
-    fun drinkItemClickListener(drink: Drink)
+    fun drinkItemClickListener(drinkId: Int)
 
 }
