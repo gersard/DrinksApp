@@ -10,7 +10,9 @@ import cl.gerardomascayano.drinksapp.core.extension.loadImage
 import cl.gerardomascayano.drinksapp.databinding.ItemDrinkSearchBinding
 import cl.gerardomascayano.drinksapp.domain.model.DrinkSearch
 import cl.gerardomascayano.drinksapp.ui.list.DrinkItemListener
-import cl.gerardomascayano.drinksapp.ui.list.SearchDrinkDiffCallback
+import cl.gerardomascayano.drinksapp.core.DrinkDiffCallback
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class ListDrinksSearchAdapter(private val drinkListener: DrinkItemListener) : RecyclerView.Adapter<ListDrinksSearchAdapter.DrinkSearchViewHolder>() {
 
@@ -24,8 +26,8 @@ class ListDrinksSearchAdapter(private val drinkListener: DrinkItemListener) : Re
 
     override fun onBindViewHolder(holder: DrinkSearchViewHolder, position: Int) = holder.bindDrink(drinksSearch[position])
 
-    fun setDrinks(drinks: List<DrinkSearch>){
-        val diffCalback = SearchDrinkDiffCallback(drinksSearch, drinks)
+    fun setDrinks(drinks: List<DrinkSearch>) {
+        val diffCalback = DrinkDiffCallback(drinksSearch, drinks)
         val diffResult = DiffUtil.calculateDiff(diffCalback)
         this.drinksSearch.clear()
         this.drinksSearch.addAll(drinks)
@@ -41,7 +43,8 @@ class ListDrinksSearchAdapter(private val drinkListener: DrinkItemListener) : Re
 
         fun bindDrink(drink: DrinkSearch) {
             viewBinding.tvDrinkName.text = drink.name
-            viewBinding.ivDrinkImage.loadImage(drink.imageUrl, 10.dpToPx())
+            viewBinding.ivDrinkImage.loadImage(drink.imageUrl, CenterCrop(),RoundedCorners(8.dpToPx()))
+
         }
 
         override fun onClick(v: View?) {

@@ -9,6 +9,7 @@ import cl.gerardomascayano.drinksapp.core.extension.loadImage
 import cl.gerardomascayano.drinksapp.databinding.ItemDrinkBinding
 import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.ui.list.DrinkItemListener
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import timber.log.Timber
 
 class ListDrinksAdapter(private val drinkListener: DrinkItemListener, private val useGridLayoutManager: Boolean = false, screenWidth: Int = 0) :
@@ -58,7 +59,7 @@ class ListDrinksAdapter(private val drinkListener: DrinkItemListener, private va
 
         fun bindDrink(drink: Drink) {
             viewBinding.tvDrinkTitle.text = drink.name
-            viewBinding.ivDrinkImage.loadImage(drink.imageUrl)
+            viewBinding.ivDrinkImage.loadImage(drink.imageUrl, CenterCrop())
         }
 
         override fun onClick(v: View?) {
