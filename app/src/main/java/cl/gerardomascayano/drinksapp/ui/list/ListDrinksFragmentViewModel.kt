@@ -9,10 +9,8 @@ import cl.gerardomascayano.drinksapp.core.Resource
 import cl.gerardomascayano.drinksapp.domain.DrinkUseCase
 import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.domain.model.DrinkSearch
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import timber.log.Timber
 
 class ListDrinksFragmentViewModel @ViewModelInject constructor(private val useCase: DrinkUseCase) : ViewModel() {
@@ -28,6 +26,19 @@ class ListDrinksFragmentViewModel @ViewModelInject constructor(private val useCa
     private var _listDrinksSearched = MutableLiveData<Resource<List<DrinkSearch>>>()
     val listDrinksSearched: LiveData<Resource<List<DrinkSearch>>>
         get() = _listDrinksSearched
+
+    var searchDrinkFlow: StateFlow<String>? = null
+    set(value) {
+        viewModelScope.launch {
+            field = value!!
+            searchDrinkFlow!!
+                .debounce(300)
+                .distinctUntilChanged()
+                .filter { it.isNotEmpty() }
+                .flowOn(Dispatchers.Default)
+                .collect { drinkName -> searchDrinksByName(drinkName)}
+        }
+    }
 
     fun loadData() {
         viewModelScope.launch {
@@ -59,7 +70,7 @@ class ListDrinksFragmentViewModel @ViewModelInject constructor(private val useCa
         }
     }
 
-    fun searchDrinksByName(name: String) {
+    private fun searchDrinksByName(name: String) {
         viewModelScope.launch {
             val drinksNames = useCase.getDrinksByName(name)
             _listDrinksSearched.value = if (drinksNames.isNotEmpty()) Resource.Success(drinksNames) else Resource.Empty()

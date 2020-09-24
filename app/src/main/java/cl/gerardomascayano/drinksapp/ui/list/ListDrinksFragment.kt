@@ -27,11 +27,17 @@ import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.ui.list.adapter.ListDrinksAdapter
 import cl.gerardomascayano.drinksapp.ui.list.adapter.ListDrinksSearchAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOn
 import timber.log.Timber
 
 
 @AndroidEntryPoint
-class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, OnFragmentBackPressed, TextWatcher {
+class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, OnFragmentBackPressed {
 
     private val viewModel = viewModels<ListDrinksFragmentViewModel>()
     private var _viewBinding: FragmentListDrinksBinding? = null
@@ -64,6 +70,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     }
 
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @SuppressLint("ClickableViewAccessibility")
     private fun setupUi() {
         viewBinding.rvFavoriteDrinkList.setHasFixedSize(true)
@@ -80,7 +87,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         }
 
         viewBinding.etSearchDrinks.setOnTouchListener(this)
-        viewBinding.etSearchDrinks.addTextChangedListener(this)
+        viewModel.value.searchDrinkFlow = viewBinding.etSearchDrinks.textChangeStateFlow()
     }
 
     private fun setupFavoriteObserver() {
@@ -111,7 +118,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
             when (resource) {
                 is Resource.Loading -> TODO()
                 is Resource.Success -> drinksSearchAdapter!!.setDrinks(resource.data)
-                is Resource.Empty -> Unit
+                is Resource.Empty -> drinksSearchAdapter!!.setDrinks(listOf())
                 is Resource.Failure -> TODO()
             }.exhaustive
 
@@ -183,15 +190,4 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         viewBinding.root.requestLayout()
     }
 
-    override fun afterTextChanged(s: Editable?) {
-        viewModel.value.searchDrinksByName(s!!.toString())
-    }
-
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-    }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-    }
 }
