@@ -8,4 +8,5 @@ interface DrinkRepository {
     suspend fun getAllFavoriteDrink(): List<Drink>
     suspend fun getAllUnFavoriteDrink(): List<Drink>
     suspend fun getAllDrinksByName(name: String): List<DrinkSearch>
+    suspend fun getDrinkById(drinkId: Int): Drink
 }

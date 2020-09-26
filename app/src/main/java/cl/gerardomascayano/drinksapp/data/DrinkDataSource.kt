@@ -9,6 +9,8 @@ interface DrinkDataSource {
 
     suspend fun getAllFavoriteDrinks(): List<DrinkWithIngredients>
 
+    suspend fun getDrinkById(drinkId: Int): DrinkWithIngredients
+
     suspend fun getDrinksByName(name: String): List<DrinkSearchTuple>
 
 }

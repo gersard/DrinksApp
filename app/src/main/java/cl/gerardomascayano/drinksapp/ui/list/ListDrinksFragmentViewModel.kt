@@ -6,12 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cl.gerardomascayano.drinksapp.core.Resource
-import cl.gerardomascayano.drinksapp.domain.DrinkUseCase
+import cl.gerardomascayano.drinksapp.domain.list.DrinkUseCase
 import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.domain.model.DrinkSearch
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import timber.log.Timber
 
 class ListDrinksFragmentViewModel @ViewModelInject constructor(private val useCase: DrinkUseCase) : ViewModel() {
 

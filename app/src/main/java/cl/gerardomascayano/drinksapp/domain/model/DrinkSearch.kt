@@ -1,6 +1,6 @@
 package cl.gerardomascayano.drinksapp.domain.model
 
-import cl.gerardomascayano.drinksapp.core.DiffUtilHelperModel
+import cl.gerardomascayano.drinksapp.core.diffutil.DiffUtilHelperModel
 
 data class DrinkSearch(
     val id: Int,

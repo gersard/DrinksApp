@@ -1,4 +1,4 @@
-package cl.gerardomascayano.drinksapp.core
+package cl.gerardomascayano.drinksapp.core.diffutil
 
 interface DiffUtilHelperModel {
 

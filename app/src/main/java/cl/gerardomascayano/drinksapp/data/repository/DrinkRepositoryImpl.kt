@@ -11,15 +11,20 @@ class DrinkRepositoryImpl @Inject constructor(private val dataSource: DrinkDataS
     override suspend fun getAllFavoriteDrink(): List<Drink> {
         val favoriteDrinksDataSource = dataSource.getAllFavoriteDrinks()
         // Map to Drink domain
-        return mapper.maptoDrinkDomain(favoriteDrinksDataSource)
+        return mapper.mapToDrinks(favoriteDrinksDataSource)
     }
 
     override suspend fun getAllUnFavoriteDrink(): List<Drink> {
         val unFavoriteDrinksDataSource = dataSource.getAllUnfavoriteDrinks()
-        return mapper.maptoDrinkDomain(unFavoriteDrinksDataSource)
+        return mapper.mapToDrinks(unFavoriteDrinksDataSource)
     }
 
     override suspend fun getAllDrinksByName(name: String): List<DrinkSearch> {
         return dataSource.getDrinksByName(name).map { DrinkSearch(it.id, it.name, it.imageUrl) }
+    }
+
+    override suspend fun getDrinkById(drinkId: Int): Drink {
+        val drinkEntity = dataSource.getDrinkById(drinkId)
+        return mapper.mapToDrink(drinkEntity)
     }
 }

@@ -9,6 +9,7 @@ class LocalDrinkDataSourceImpl @Inject constructor(private val drinksDao: DrinkD
     DrinkDataSource {
 
     override suspend fun getAllFavoriteDrinks(): List<DrinkWithIngredients> = drinksDao.getDrinkWithIngredientsFavorite()
+    override suspend fun getDrinkById(drinkId: Int): DrinkWithIngredients = drinksDao.getDrinkById(drinkId)
     override suspend fun getDrinksByName(name: String): List<DrinkSearchTuple> = drinksDao.getDrinksByName(name)
     override suspend fun getAllUnfavoriteDrinks(): List<DrinkWithIngredients> = drinksDao.getDrinkWithIngredientsUnfavorite()
 }

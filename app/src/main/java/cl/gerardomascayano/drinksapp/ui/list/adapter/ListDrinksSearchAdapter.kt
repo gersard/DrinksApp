@@ -10,7 +10,7 @@ import cl.gerardomascayano.drinksapp.core.extension.loadImage
 import cl.gerardomascayano.drinksapp.databinding.ItemDrinkSearchBinding
 import cl.gerardomascayano.drinksapp.domain.model.DrinkSearch
 import cl.gerardomascayano.drinksapp.ui.list.DrinkItemListener
-import cl.gerardomascayano.drinksapp.core.DrinkDiffCallback
+import cl.gerardomascayano.drinksapp.core.diffutil.DrinkDiffCallback
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 

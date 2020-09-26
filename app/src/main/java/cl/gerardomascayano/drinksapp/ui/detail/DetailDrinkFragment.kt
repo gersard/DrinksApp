@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import cl.gerardomascayano.drinksapp.R
+import cl.gerardomascayano.drinksapp.databinding.FragmentDetailDrinkBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailDrinkFragment : Fragment() {
-    private var param1: String? = null
+
+    private var _viewBinding: FragmentDetailDrinkBinding? = null
+    private val viewBinding get() = _viewBinding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,17 +21,24 @@ class DetailDrinkFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_drink, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _viewBinding = FragmentDetailDrinkBinding.inflate(inflater, container, false)
+        return viewBinding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _viewBinding = null
     }
 
     companion object {
+
+        private const val KEY_ID_DRINK = "id_drink"
+
         @JvmStatic
-        fun newInstance(param1: String) =
-            DetailDrinkFragment()
+        fun newInstance(idDrink: Int) =
+            DetailDrinkFragment().apply {
+                arguments = Bundle().apply { putInt(KEY_ID_DRINK, idDrink) }
+            }
     }
 }

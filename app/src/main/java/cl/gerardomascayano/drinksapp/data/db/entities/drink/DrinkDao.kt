@@ -15,6 +15,9 @@ interface DrinkDao {
     @Query("SELECT drinkId as id, name, image_url FROM DRINK WHERE name LIKE '%' || :name || '%'")
     suspend fun getDrinksByName(name: String): List<DrinkSearchTuple>
 
+    @Query("SELECT * FROM DRINK WHERE drinkId = :id")
+    suspend fun getDrinkById(id: Int): DrinkWithIngredients
+
     @Transaction
     @Query("SELECT * FROM DRINK WHERE favorite = 1")
     suspend fun getDrinkWithIngredientsFavorite(): List<DrinkWithIngredients>
