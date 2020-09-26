@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_position"
+        style="@style/Content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="1" />
+
+    <TextView
+        style="@style/Content"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="@string/divider_step"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_step"
+        style="@style/Content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        tools:text="Combine whiskey, vermouth, and bitters in a cocktail mixing class. Add ice and stir until chilled.Strain into a chilled cocktail glass.Garnish with a maraschino cherry." />
+
+</LinearLayout>
