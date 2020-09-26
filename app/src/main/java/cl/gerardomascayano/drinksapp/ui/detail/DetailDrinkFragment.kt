@@ -9,9 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import cl.gerardomascayano.drinksapp.R
 import cl.gerardomascayano.drinksapp.core.Resource
+import cl.gerardomascayano.drinksapp.core.extension.dpToPx
 import cl.gerardomascayano.drinksapp.core.extension.exhaustive
+import cl.gerardomascayano.drinksapp.core.extension.loadImage
 import cl.gerardomascayano.drinksapp.databinding.FragmentDetailDrinkBinding
 import cl.gerardomascayano.drinksapp.domain.model.Drink
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,9 +28,7 @@ class DetailDrinkFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            drinkId = it.getInt(KEY_ID_DRINK)
-        }
+        arguments?.let { drinkId = it.getInt(KEY_ID_DRINK) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,6 +57,7 @@ class DetailDrinkFragment : Fragment() {
         viewBinding.tvTitle.text = drink.name
         viewBinding.rbRating.rating = drink.rating
         viewBinding.cbFavorite.isChecked = drink.favorite
+        viewBinding.ivImage.loadImage(drink.imageUrl, CenterCrop(), RoundedCorners(6.dpToPx()))
     }
 
     override fun onDestroyView() {
