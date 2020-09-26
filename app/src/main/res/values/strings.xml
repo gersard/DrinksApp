@@ -9,4 +9,5 @@
     <string name="title_drinks_related">Related</string>
     <string name="title_drink_steps">Steps</string>
     <string name="title_drink_ingredients">Ingredients</string>
+    <string name="divider_unit_ingredient">-</string>
 </resources>
