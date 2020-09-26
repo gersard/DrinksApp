@@ -14,16 +14,19 @@ import androidx.core.view.isVisible
 import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import cl.gerardomascayano.drinksapp.R
 import cl.gerardomascayano.drinksapp.core.OnFragmentBackPressed
 import cl.gerardomascayano.drinksapp.core.Resource
 import cl.gerardomascayano.drinksapp.core.extension.*
 import cl.gerardomascayano.drinksapp.databinding.FragmentListDrinksBinding
 import cl.gerardomascayano.drinksapp.domain.model.Drink
+import cl.gerardomascayano.drinksapp.ui.detail.DetailDrinkFragment
 import cl.gerardomascayano.drinksapp.ui.list.adapter.ListDrinksAdapter
 import cl.gerardomascayano.drinksapp.ui.list.adapter.ListDrinksSearchAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -156,7 +159,12 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     }
 
     override fun drinkItemClickListener(drinkId: Int) {
-        Timber.d("Drink clicked: $drinkId")
+        activity?.let {
+            it.supportFragmentManager.commit {
+                addToBackStack("")
+                replace(R.id.fcv_main, DetailDrinkFragment.newInstance(drinkId))
+            }
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

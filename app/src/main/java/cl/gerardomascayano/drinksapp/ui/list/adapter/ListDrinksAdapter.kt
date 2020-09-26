@@ -55,6 +55,7 @@ class ListDrinksAdapter(private val drinkListener: DrinkItemListener, private va
 
         init {
             viewBinding.root.setOnClickListener(this)
+//            viewBinding.ivDrinkImage.setOnClickListener(this)
         }
 
         fun bindDrink(drink: Drink) {
