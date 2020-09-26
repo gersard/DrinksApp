@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/background</item>
@@ -42,6 +42,18 @@
         <item name="android:shadowDx">4</item>
         <item name="android:shadowDy">5</item>
         <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="SubTitle" parent="AppTheme">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:letterSpacing">0.07</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:shadowColor">@color/shadow_text</item>
+        <item name="android:shadowRadius">10</item>
+        <item name="android:shadowDx">4</item>
+        <item name="android:shadowDy">5</item>
+        <item name="fontFamily">@font/roboto_medium</item>
     </style>
 
     <style name="DrinkListText" parent="AppTheme">

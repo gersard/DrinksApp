@@ -6,4 +6,7 @@
     <string name="title_favorite_drinks">Favorite\nDrinks</string>
     <string name="title_all_drinks">All\ndrinks</string>
     <string name="hint_search_drinks">Search drinks</string>
+    <string name="title_drinks_related">Related</string>
+    <string name="title_drink_steps">Steps</string>
+    <string name="title_drink_ingredients">Ingredients</string>
 </resources>
