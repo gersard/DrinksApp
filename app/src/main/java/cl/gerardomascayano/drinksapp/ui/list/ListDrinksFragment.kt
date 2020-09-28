@@ -79,6 +79,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         viewBinding.rvFavoriteDrinkList.setHasFixedSize(true)
         viewBinding.rvFavoriteDrinkList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         favoriteAdapterDrinks = ListDrinksAdapter(this)
+        favoriteAdapterDrinks.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         viewBinding.rvFavoriteDrinkList.adapter = favoriteAdapterDrinks
 
         viewBinding.rvUnfavoriteDrinkList.layoutManager = GridLayoutManager(context, 2)

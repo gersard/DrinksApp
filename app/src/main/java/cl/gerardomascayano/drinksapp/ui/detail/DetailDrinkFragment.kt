@@ -7,24 +7,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import cl.gerardomascayano.drinksapp.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import cl.gerardomascayano.drinksapp.core.Resource
 import cl.gerardomascayano.drinksapp.core.extension.dpToPx
 import cl.gerardomascayano.drinksapp.core.extension.exhaustive
 import cl.gerardomascayano.drinksapp.core.extension.loadImage
 import cl.gerardomascayano.drinksapp.databinding.FragmentDetailDrinkBinding
 import cl.gerardomascayano.drinksapp.domain.model.Drink
+import cl.gerardomascayano.drinksapp.domain.model.UnitType
+import cl.gerardomascayano.drinksapp.ui.detail.adapter.IngredientsDetailAdapter
+import cl.gerardomascayano.drinksapp.ui.detail.adapter.StepsDetailAdapter
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.google.android.material.button.MaterialButtonToggleGroup
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailDrinkFragment : Fragment() {
+class DetailDrinkFragment : Fragment(), MaterialButtonToggleGroup.OnButtonCheckedListener {
 
     private var _viewBinding: FragmentDetailDrinkBinding? = null
     private val viewBinding get() = _viewBinding!!
     private val viewModel = viewModels<DetailDrinkFragmentViewModel>()
     private var drinkId: Int? = null
+    private var ingredientsAdapter: IngredientsDetailAdapter? = null
+    private var stepsAdapter: StepsDetailAdapter? = null
+    private lateinit var currentUnit: UnitType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +45,11 @@ class DetailDrinkFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        currentUnit = UnitType.ML
         setupObservers()
+        viewBinding.rvIngredients.layoutManager = LinearLayoutManager(context)
+        viewBinding.rvSteps.layoutManager = LinearLayoutManager(context)
+        viewBinding.mtgUnits.addOnButtonCheckedListener(this)
         viewModel.value.getDrink(drinkId!!)
     }
 
@@ -58,6 +69,22 @@ class DetailDrinkFragment : Fragment() {
         viewBinding.rbRating.rating = drink.rating
         viewBinding.cbFavorite.isChecked = drink.favorite
         viewBinding.ivImage.loadImage(drink.imageUrl, CenterCrop(), RoundedCorners(6.dpToPx()))
+
+        ingredientsAdapter = IngredientsDetailAdapter(drink.ingredients, currentUnit)
+        viewBinding.rvIngredients.adapter = ingredientsAdapter
+//        stepsAdapter = StepsDetailAdapter(drink.steps)
+
+
+    }
+
+    override fun onButtonChecked(group: MaterialButtonToggleGroup?, checkedId: Int, isChecked: Boolean) {
+        if (!isChecked) return
+        currentUnit = when (checkedId) {
+            viewBinding.mbMl.id -> UnitType.ML
+            viewBinding.mbOunces.id -> UnitType.OZ
+            else -> UnitType.ML
+        }
+        ingredientsAdapter?.changeUnitSelected(currentUnit)
     }
 
     override fun onDestroyView() {

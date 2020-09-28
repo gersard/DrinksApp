@@ -51,12 +51,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:textAllCaps="true"
+        android:gravity="center"
         android:lines="1"
-        app:autoSizeTextType="uniform"
+        android:textAllCaps="true"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="0.5sp"
-        android:gravity="center"
+        app:autoSizeTextType="uniform"
         app:layout_constraintEnd_toStartOf="@+id/ib_edit"
         app:layout_constraintStart_toEndOf="@+id/ib_back"
         app:layout_constraintTop_toTopOf="parent"
@@ -97,6 +97,12 @@
         android:id="@+id/rb_rating"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:numStars="5"
+        android:rating="3"
+        android:scaleX=".5"
+        android:scaleY=".5"
+        android:stepSize="0.5"
         app:layout_constraintEnd_toEndOf="@+id/iv_image"
         app:layout_constraintStart_toStartOf="@+id/iv_image"
         app:layout_constraintTop_toBottomOf="@+id/iv_image" />
@@ -121,9 +127,9 @@
             android:layout_height="match_parent"
             android:backgroundTint="@drawable/bg_toggle_button_selector"
             android:text="ml"
+            android:textColor="@drawable/text_toggle_button_selector"
             android:textSize="14sp"
             app:cornerRadius="6dp"
-            android:textColor="@drawable/text_toggle_button_selector"
             app:strokeColor="@color/black" />
 
         <com.google.android.material.button.MaterialButton
@@ -131,11 +137,11 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:cornerRadius="6dp"
-            android:textSize="14sp"
             android:backgroundTint="@drawable/bg_toggle_button_selector"
             android:text="oz"
             android:textColor="@drawable/text_toggle_button_selector"
+            android:textSize="14sp"
+            app:cornerRadius="6dp"
             app:strokeColor="@color/black" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
