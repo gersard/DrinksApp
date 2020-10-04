@@ -7,4 +7,6 @@
     <dimen name="height_favorite_drink_title">150dp</dimen>
     <dimen name="square_size_icon_detail">36dp</dimen>
     <dimen name="square_size_image_drink_detail">160dp</dimen>
+
+    <dimen name="height_et_search">40dp</dimen>
 </resources>

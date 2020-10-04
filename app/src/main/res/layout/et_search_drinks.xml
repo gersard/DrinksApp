@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EditText xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/et_search_drinks"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_et_search"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginStart="32dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginEnd="32dp"
+    android:autofillHints=""
+    android:background="@drawable/background_white_corner_radius"
+    android:drawableEnd="@drawable/ic_search_black"
+    android:elevation="4dp"
+    android:hint="@string/hint_search_drinks"
+    android:imeOptions="actionDone"
+    android:inputType="textFilter"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp" />
