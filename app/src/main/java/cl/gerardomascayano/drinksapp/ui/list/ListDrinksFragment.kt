@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.core.view.marginStart
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
@@ -64,21 +67,14 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     @OptIn(ExperimentalCoroutinesApi::class)
     @SuppressLint("ClickableViewAccessibility")
     private fun setupUi() {
-        searchAdapter = SearchDrinksAdapter()
-//        searchAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        searchAdapter = SearchDrinksAdapter(this)
         titleFavoriteAdapter = TitleAdapter(getString(R.string.title_favorite_drinks))
-//        titleFavoriteAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         titleAllAdapter = TitleAdapter(getString(R.string.title_all_drinks))
-//        titleAllAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         favoriteDrinksAdapter = ListDrinksAdapter(this)
-//        favoriteDrinksAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         allDrinksAdapter = ListDrinksAdapter(this, true, requireActivity().screenWidth() - (16.dpToPx() + 16.dpToPx()))
-//        allDrinksAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
         wrapperFavoriteDrinksAdapter = LinearConcatAdapter(favoriteDrinksAdapter, LinearLayoutManager.HORIZONTAL)
-//        linearConcatAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         val gridConcatAdapter = GridConcatAdapter(allDrinksAdapter, 2)
-//        gridConcatAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         val mergeAdapter = ConcatAdapter(
             searchAdapter, titleFavoriteAdapter, wrapperFavoriteDrinksAdapter
             , titleAllAdapter, gridConcatAdapter
@@ -188,33 +184,48 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-//        if (v?.id == viewBinding.etSearchDrinks.id && event?.action == MotionEvent.ACTION_UP && rvSearchListResults?.isVisible() != true) {
+        if (v?.id == searchAdapter.etSearchId && event?.action == MotionEvent.ACTION_UP && rvSearchListResults?.isVisible() != true) {
 //            v.changeWidth(v.width, requireActivity().screenWidth() - (32.dpToPx()))
-//            viewBinding.etSearchDrinks.changeElevation(6.dpToPx().toFloat(), 10.dpToPx().toFloat())
-//            showSearchResultsView()
-//        }
+            v.changeMargin(10.dpToPx())
+            v.changeElevation(6.dpToPx().toFloat(), 10.dpToPx().toFloat())
+            showSearchResultsView(v.height, v.y)
+        }
         return v!!.onTouchEvent(event)
     }
 
-//    private fun showSearchResultsView() {
-//        if (rvSearchListResults == null) {
-//            rvSearchListResults = viewBinding.vsSearchDrinks.inflate() as RecyclerView
-//            rvSearchListResults!!.layoutManager = LinearLayoutManager(requireContext())
-//            this.drinksSearchAdapter = ListDrinksSearchAdapter(this)
-//            rvSearchListResults!!.adapter = drinksSearchAdapter
-//        }
-//        rvSearchListResults!!.visible(true)
-//    }
+    private fun showSearchResultsView(heightEt: Int, yAxisPos: Float) {
+        if (rvSearchListResults == null) {
+            rvSearchListResults = viewBinding.vsSearchDrinks.inflate() as RecyclerView
+
+            // Eje y + Height of Edit Text + Margin
+            rvSearchListResults!!.y = yAxisPos + heightEt + (10.dpToPx())
+            rvSearchListResults!!.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                marginStart = 10.dpToPx()
+                marginEnd = 10.dpToPx()
+            }
+
+            rvSearchListResults!!.layoutManager = LinearLayoutManager(requireContext())
+            this.drinksSearchAdapter = ListDrinksSearchAdapter(this)
+            rvSearchListResults!!.adapter = drinksSearchAdapter
+
+            viewModel.value.searchDrinkFlow = searchAdapter.stateFlow
+        }
+        rvSearchListResults!!.visible(true)
+    }
 
     private fun hideSearchResultsView() {
         rvSearchListResults?.gone(true)
     }
 
     override fun onFragmentBackPressed() {
-//        viewBinding.etSearchDrinks.changeWidth(viewBinding.etSearchDrinks.width, requireActivity().screenWidth() - (64.dpToPx()), 300)
-//        viewBinding.etSearchDrinks.changeElevation(10.dpToPx().toFloat(), 6.dpToPx().toFloat())
-//        hideSearchResultsView()
-//        viewBinding.root.requestLayout()
+        val focusedView = view?.findFocus()
+        if (focusedView is EditText) {
+            focusedView.changeMargin(20.dpToPx())
+            focusedView.changeElevation(10.dpToPx().toFloat(), 6.dpToPx().toFloat())
+            hideSearchResultsView()
+            viewBinding.root.requestLayout()
+        }
+
     }
 
 }
