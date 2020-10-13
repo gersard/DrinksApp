@@ -1,5 +1,6 @@
 package cl.gerardomascayano.drinksapp.ui.list
 
+import android.os.Parcelable
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,6 +14,9 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 class ListDrinksFragmentViewModel @ViewModelInject constructor(private val useCase: DrinkUseCase) : ViewModel() {
+
+    var stateAllDrinks: Parcelable? = null
+    var stateFavoriteDrinks: Parcelable? = null
 
     private var _listDrinksFavoriteEvent = MutableLiveData<Resource<List<Drink>>>()
     val listDrinksFavoriteEvent: LiveData<Resource<List<Drink>>>

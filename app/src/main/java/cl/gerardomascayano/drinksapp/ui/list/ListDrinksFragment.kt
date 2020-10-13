@@ -12,7 +12,6 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cl.gerardomascayano.drinksapp.R
@@ -20,6 +19,7 @@ import cl.gerardomascayano.drinksapp.core.OnFragmentBackPressed
 import cl.gerardomascayano.drinksapp.core.Resource
 import cl.gerardomascayano.drinksapp.core.extension.*
 import cl.gerardomascayano.drinksapp.databinding.FragmentListDrinksBinding
+import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.ui.detail.DetailDrinkFragment
 import cl.gerardomascayano.drinksapp.ui.list.adapter.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +35,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     private var rvSearchListResults: RecyclerView? = null
     private lateinit var favoriteDrinksAdapter: ListDrinksAdapter
     private lateinit var allDrinksAdapter: ListDrinksAdapter
+    private lateinit var wrapperFavoriteDrinksAdapter: LinearConcatAdapter
     private lateinit var searchAdapter: SearchDrinksAdapter
     private lateinit var titleFavoriteAdapter: TitleAdapter
     private lateinit var titleAllAdapter: TitleAdapter
@@ -64,22 +65,22 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupUi() {
         searchAdapter = SearchDrinksAdapter()
-        searchAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+//        searchAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         titleFavoriteAdapter = TitleAdapter(getString(R.string.title_favorite_drinks))
-        titleFavoriteAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+//        titleFavoriteAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         titleAllAdapter = TitleAdapter(getString(R.string.title_all_drinks))
-        titleAllAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+//        titleAllAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         favoriteDrinksAdapter = ListDrinksAdapter(this)
-        favoriteDrinksAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+//        favoriteDrinksAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         allDrinksAdapter = ListDrinksAdapter(this, true, requireActivity().screenWidth() - (16.dpToPx() + 16.dpToPx()))
-        allDrinksAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+//        allDrinksAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
-        val linearConcatAdapter = LinearConcatAdapter(favoriteDrinksAdapter, LinearLayoutManager.HORIZONTAL)
-        linearConcatAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        wrapperFavoriteDrinksAdapter = LinearConcatAdapter(favoriteDrinksAdapter, LinearLayoutManager.HORIZONTAL)
+//        linearConcatAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         val gridConcatAdapter = GridConcatAdapter(allDrinksAdapter, 2)
-        gridConcatAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+//        gridConcatAdapter.stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         val mergeAdapter = ConcatAdapter(
-            searchAdapter, titleFavoriteAdapter, linearConcatAdapter
+            searchAdapter, titleFavoriteAdapter, wrapperFavoriteDrinksAdapter
             , titleAllAdapter, gridConcatAdapter
         )
 
@@ -96,11 +97,18 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
             when (resource) {
                 // if (resource.isLoading) showProgressFavoriteDrinks() else hideProgressFavoriteDrinks()
                 is Resource.Loading -> Unit
-                is Resource.Success -> favoriteDrinksAdapter.addDrinks(resource.data)
+                is Resource.Success -> successFavoriteDrinks(resource.data)
                 is Resource.Empty -> Unit
                 is Resource.Failure -> Unit
             }.exhaustive
         })
+    }
+
+    private fun successFavoriteDrinks(drinks: List<Drink>) {
+        favoriteDrinksAdapter.addDrinks(drinks)
+        if (viewModel.value.stateFavoriteDrinks != null) {
+            wrapperFavoriteDrinksAdapter.layoutInstance = viewModel.value.stateFavoriteDrinks
+        }
     }
 
     @Suppress("IMPLICIT_CAST_TO_ANY")
@@ -109,12 +117,19 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
             when (resource) {
                 // if (resource.isLoading) showProgressUnFavoriteDrinks() else hideProgressUnFavoriteDrinks()
                 is Resource.Loading -> Unit
-                is Resource.Success -> allDrinksAdapter.addDrinks(resource.data)
+                is Resource.Success -> successUnfavorite(resource.data)
                 // hideUnfavoritesView()
                 is Resource.Empty -> Unit
                 is Resource.Failure -> Unit
             }.exhaustive
         })
+    }
+
+    private fun successUnfavorite(drinks: List<Drink>) {
+        allDrinksAdapter.addDrinks(drinks)
+        if (viewModel.value.stateAllDrinks != null) {
+            viewBinding.rvMain.layoutManager?.onRestoreInstanceState(viewModel.value.stateAllDrinks)
+        }
     }
 
     private fun setupSearchedObservers() {
@@ -159,7 +174,10 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         _viewBinding = null
     }
 
+
     override fun drinkItemClickListener(drinkId: Int) {
+        viewModel.value.stateAllDrinks = viewBinding.rvMain.layoutManager?.onSaveInstanceState()
+        viewModel.value.stateFavoriteDrinks = wrapperFavoriteDrinksAdapter.getStateLayoutManager()
         activity?.let {
             it.supportFragmentManager.commit {
                 addToBackStack("")
