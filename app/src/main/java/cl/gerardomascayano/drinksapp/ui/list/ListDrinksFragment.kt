@@ -54,7 +54,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
         setupUi()
         setupFavoriteObserver()
         setupUnfavoriteObserver()
-        setupSearchedObservers()
+
         viewModel.value.loadData()
 
         activity?.onBackPressedDispatcher?.addCallback(
@@ -168,6 +168,8 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     override fun onDestroyView() {
         super.onDestroyView()
         _viewBinding = null
+        rvSearchListResults = null
+        drinksSearchAdapter = null
     }
 
 
@@ -209,6 +211,8 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
             rvSearchListResults!!.adapter = drinksSearchAdapter
 
             viewModel.value.searchDrinkFlow = searchAdapter.stateFlow
+
+            setupSearchedObservers()
         }
         rvSearchListResults!!.visible(true)
     }
