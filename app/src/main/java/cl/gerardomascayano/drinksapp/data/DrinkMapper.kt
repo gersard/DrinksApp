@@ -1,5 +1,6 @@
 package cl.gerardomascayano.drinksapp.data
 
+import cl.gerardomascayano.drinksapp.data.db.entities.drink.DrinkEntity
 import cl.gerardomascayano.drinksapp.domain.model.Drink
 import cl.gerardomascayano.drinksapp.domain.model.Ingredient
 import cl.gerardomascayano.drinksapp.domain.model.Unit
@@ -40,6 +41,10 @@ class DrinkMapper() {
         return drinksWithIngredients.map { drinkWithIngredients ->
             mapToDrink(drinkWithIngredients)
         }
+    }
+
+    fun mapToDrinkEntity(drink: Drink): DrinkEntity {
+        return DrinkEntity(drink.id, drink.name, drink.imageUrl, drink.rating, drink.favorite)
     }
 
 }

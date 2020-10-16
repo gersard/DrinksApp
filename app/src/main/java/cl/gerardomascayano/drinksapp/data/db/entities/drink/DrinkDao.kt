@@ -1,10 +1,7 @@
 package cl.gerardomascayano.drinksapp.data.db.entities.drink
 
-import androidx.room.Dao
-import androidx.room.Insert
+import androidx.room.*
 import androidx.room.OnConflictStrategy.REPLACE
-import androidx.room.Query
-import androidx.room.Transaction
 
 @Dao
 interface DrinkDao {
@@ -25,6 +22,9 @@ interface DrinkDao {
     @Transaction
     @Query("SELECT * FROM DRINK WHERE favorite = 0")
     suspend fun getDrinkWithIngredientsUnfavorite(): List<DrinkWithIngredients>
+
+    @Update(entity = DrinkEntity::class)
+    suspend fun updateDrink(drinkEntity: DrinkEntity): Long
 
 
 }
