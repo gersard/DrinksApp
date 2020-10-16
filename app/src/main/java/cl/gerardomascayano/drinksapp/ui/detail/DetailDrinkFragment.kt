@@ -51,6 +51,8 @@ class DetailDrinkFragment : Fragment(), MaterialButtonToggleGroup.OnButtonChecke
         viewBinding.rvSteps.layoutManager = LinearLayoutManager(context)
         viewBinding.mtgUnits.addOnButtonCheckedListener(this)
         viewModel.value.getDrink(drinkId!!)
+
+        viewBinding.ibBack.setOnClickListener { activity?.onBackPressed() }
     }
 
     private fun setupObservers() {

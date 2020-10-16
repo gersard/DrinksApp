@@ -28,12 +28,13 @@ class ListDrinksAdapter(private val drinkListener: DrinkItemListener, private va
         val viewBinding = ItemDrinkBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         if (useGridLayoutManager) {
             val lp = viewBinding.root.layoutParams
-            lp.width = squareSize!!
-            lp.height = squareSize!!
+            val parentWidth = parent.width / 2
+            lp.width = parentWidth
+            lp.height = parentWidth
             viewBinding.root.layoutParams = lp
 
             val imageLp = viewBinding.ivDrinkImage.layoutParams
-            imageLp.height = squareSize!!
+            imageLp.height = parentWidth
             viewBinding.ivDrinkImage.layoutParams = imageLp
         }
         return DrinkListViewHolder(viewBinding)
@@ -64,8 +65,8 @@ class ListDrinksAdapter(private val drinkListener: DrinkItemListener, private va
         }
 
         override fun onClick(v: View?) {
-            if (adapterPosition != RecyclerView.NO_POSITION) {
-                drinkListener.drinkItemClickListener(listDrinks[adapterPosition].id)
+            if (bindingAdapterPosition != RecyclerView.NO_POSITION) {
+                drinkListener.drinkItemClickListener(listDrinks[bindingAdapterPosition].id)
             }
         }
 

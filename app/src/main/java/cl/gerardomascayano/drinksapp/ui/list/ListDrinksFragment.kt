@@ -38,10 +38,10 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     private var rvSearchListResults: RecyclerView? = null
     private lateinit var favoriteDrinksAdapter: ListDrinksAdapter
     private lateinit var allDrinksAdapter: ListDrinksAdapter
-    private lateinit var wrapperFavoriteDrinksAdapter: LinearConcatAdapter
     private lateinit var searchAdapter: SearchDrinksAdapter
     private lateinit var titleFavoriteAdapter: TitleAdapter
     private lateinit var titleAllAdapter: TitleAdapter
+    private var wrapperFavoriteDrinksAdapter: LinearConcatAdapter? = null
     private var drinksSearchAdapter: ListDrinksSearchAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -103,7 +103,7 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
     private fun successFavoriteDrinks(drinks: List<Drink>) {
         favoriteDrinksAdapter.addDrinks(drinks)
         if (viewModel.value.stateFavoriteDrinks != null) {
-            wrapperFavoriteDrinksAdapter.layoutInstance = viewModel.value.stateFavoriteDrinks
+            wrapperFavoriteDrinksAdapter?.layoutInstance = viewModel.value.stateFavoriteDrinks
         }
     }
 
@@ -167,16 +167,19 @@ class ListDrinksFragment : Fragment(), DrinkItemListener, View.OnTouchListener, 
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewBinding.rvMain.adapter = null
         _viewBinding = null
         rvSearchListResults = null
         drinksSearchAdapter = null
+        wrapperFavoriteDrinksAdapter = null
     }
 
 
     override fun drinkItemClickListener(drinkId: Int) {
         viewModel.value.stateAllDrinks = viewBinding.rvMain.layoutManager?.onSaveInstanceState()
-        viewModel.value.stateFavoriteDrinks = wrapperFavoriteDrinksAdapter.getStateLayoutManager()
+        viewModel.value.stateFavoriteDrinks = wrapperFavoriteDrinksAdapter?.getStateLayoutManager()
         activity?.let {
+
             it.supportFragmentManager.commit {
                 addToBackStack("")
                 replace(R.id.fcv_main, DetailDrinkFragment.newInstance(drinkId))
