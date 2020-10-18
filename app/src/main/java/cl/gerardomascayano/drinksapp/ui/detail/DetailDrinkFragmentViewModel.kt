@@ -12,16 +12,27 @@ import kotlinx.coroutines.launch
 
 class DetailDrinkFragmentViewModel @ViewModelInject constructor(private val useCase: DetailDrinkUseCase) : ViewModel() {
 
+    var drink: Drink? = null
+
     private var _detailDrinkEvent = MutableLiveData<Resource<Drink>>()
     val detailDrinkEvent: LiveData<Resource<Drink>>
         get() = _detailDrinkEvent
 
     fun getDrink(drinkId: Int) {
         viewModelScope.launch {
-            val drink = useCase.getDrink(drinkId)
-            _detailDrinkEvent.value = Resource.Success(drink)
+            drink = useCase.getDrink(drinkId).also { _detailDrinkEvent.value = Resource.Success(it) }
         }
     }
 
 
+    fun updateDrink(){
+        viewModelScope.launch {
+            val success = useCase.updateDrink(drink!!)
+            if (success){
+
+            }else{
+
+            }
+        }
+    }
 }

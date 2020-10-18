@@ -10,5 +10,5 @@ interface DrinkRepository {
     suspend fun getAllUnFavoriteDrink(): List<Drink>
     suspend fun getAllDrinksByName(name: String): List<DrinkSearch>
     suspend fun getDrinkById(drinkId: Int): Drink
-    suspend fun updateDrink(drink: Drink): Long
+    suspend fun updateDrink(drink: Drink): Int
 }

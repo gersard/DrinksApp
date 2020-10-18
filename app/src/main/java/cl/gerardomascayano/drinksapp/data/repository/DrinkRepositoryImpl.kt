@@ -29,7 +29,7 @@ class DrinkRepositoryImpl @Inject constructor(private val dataSource: DrinkDataS
         return mapper.mapToDrink(drinkEntity)
     }
 
-    override suspend fun updateDrink(drink: Drink): Long {
+    override suspend fun updateDrink(drink: Drink): Int {
         return dataSource.updateDrink(
             mapper.mapToDrinkEntity(drink)
         )

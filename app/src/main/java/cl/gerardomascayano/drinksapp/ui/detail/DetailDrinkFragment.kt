@@ -53,6 +53,12 @@ class DetailDrinkFragment : Fragment(), MaterialButtonToggleGroup.OnButtonChecke
         viewModel.value.getDrink(drinkId!!)
 
         viewBinding.ibBack.setOnClickListener { activity?.onBackPressed() }
+        viewBinding.cbFavorite.setOnCheckedChangeListener { btn, isChecked ->
+            if (btn.isPressed){
+                viewModel.value.drink?.favorite = isChecked
+                viewModel.value.updateDrink()
+            }
+        }
     }
 
     private fun setupObservers() {

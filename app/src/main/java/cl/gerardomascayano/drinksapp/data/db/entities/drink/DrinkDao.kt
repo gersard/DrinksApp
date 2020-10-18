@@ -24,7 +24,7 @@ interface DrinkDao {
     suspend fun getDrinkWithIngredientsUnfavorite(): List<DrinkWithIngredients>
 
     @Update(entity = DrinkEntity::class)
-    suspend fun updateDrink(drinkEntity: DrinkEntity): Long
+    suspend fun updateDrink(drinkEntity: DrinkEntity): Int
 
 
 }

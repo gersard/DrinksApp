@@ -14,6 +14,6 @@ interface DrinkDataSource {
 
     suspend fun getDrinksByName(name: String): List<DrinkSearchTuple>
 
-    suspend fun updateDrink(drinkEntity: DrinkEntity): Long
+    suspend fun updateDrink(drinkEntity: DrinkEntity): Int
 
 }
